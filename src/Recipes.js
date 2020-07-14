@@ -19,7 +19,7 @@ export const Recipes = () => {
   const onCancel = useCallback(() => {
     setActive(false);
     setIngredients([]);
-  });
+  }, [setActive, setIngredients]);
 
   if (status === "loading") {
     return <div>Loading...</div>;
