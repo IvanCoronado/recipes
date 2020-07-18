@@ -10,16 +10,17 @@ const Base = () => {
   return (
     <>
       <Switch>
-        <Route path={`/:apiKey/recipes`} component={Recipes} />
         <Route path={`/:apiKey/groceries`} component={Groceries} />
+        <Route path={`/:apiKey/recipes`} component={Recipes} />
       </Switch>
       <div>
         <Link to={"recipes"}>Recipes</Link>
-        <Link to={"gorceries"}>Groceries</Link>
+        <Link to={"groceries"}>Groceries</Link>
       </div>
     </>
   );
 };
+
 function App() {
   return (
     <SelectedRecipesProvider>

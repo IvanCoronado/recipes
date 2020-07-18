@@ -1,6 +1,6 @@
-import React from "react";
-import { useSelectedRecipes } from "./context";
+import React, { useMemo } from "react";
 import { useIngredient } from "./useIngredient";
+import { useParams } from "react-router-dom";
 
 const Ingredient = ({ id }) => {
   const { data, status } = useIngredient(id);
@@ -13,11 +13,20 @@ const Ingredient = ({ id }) => {
 };
 
 export const Groceries = () => {
-  const { ingredients } = useSelectedRecipes();
-  console.log(ingredients);
+  const { apiKey } = useParams();
+  const ingredients = useMemo(() => {
+    const selectedRecipes = localStorage.getItem(apiKey)
+      ? JSON.parse(localStorage.getItem(apiKey))
+      : [];
+
+    return selectedRecipes.flatMap(({ fields }) =>
+      fields.ingredients.map((id) => id)
+    );
+  }, [apiKey]);
+
   return (
     <div>
-      <h1>Groceries</h1>
+      <h1>Lista de la compra</h1>
       <div>
         {ingredients.map((id) => (
           <Ingredient key={id} id={id} />
