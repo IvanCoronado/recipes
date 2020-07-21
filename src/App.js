@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import { Recipes } from "./Recipes";
 import { Groceries } from "./Groceries";
 
@@ -8,16 +13,30 @@ import "./App.css";
 
 const Base = () => {
   return (
-    <>
+    <div className="main-wrapper">
       <Switch>
         <Route path={`/:apiKey/groceries`} component={Groceries} />
         <Route path={`/:apiKey/recipes`} component={Recipes} />
       </Switch>
-      <div>
-        <Link to={"recipes"}>Recipes</Link>
-        <Link to={"groceries"}>Groceries</Link>
+      <div className="footer-nav">
+        <NavLink
+          activeStyle={{
+            fontWeight: "bold",
+          }}
+          to={"recipes"}
+        >
+          Recipes
+        </NavLink>
+        <NavLink
+          activeStyle={{
+            fontWeight: "bold",
+          }}
+          to={"groceries"}
+        >
+          Groceries
+        </NavLink>
       </div>
-    </>
+    </div>
   );
 };
 

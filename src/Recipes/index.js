@@ -1,47 +1,60 @@
 import React from "react";
 import { useConnect } from "./connect";
+import "./styles.css";
 
 export const Recipes = () => {
   const { data, planActive, selectedRecipes, isLoading, handle } = useConnect();
 
   if (!data && isLoading) {
-    return <div>Loading...</div>;
+    return <div className="full-loading">Cargando...</div>;
   }
 
   if (!data) {
-    return <div>Ups... error</div>;
+    return <div className="full-loading">Ups... error</div>;
   }
 
   const { records: recipesList } = data;
 
   return (
-    <div>
+    <div className="recipe-container">
       <h1>Recetas</h1>
-      <div>
+      <div className="recipes">
         {planActive ? (
           <>
             {selectedRecipes.map((recipe) => (
-              <div key={recipe.id}>{recipe.fields.name}</div>
+              <div className="recipe-row" key={recipe.id}>
+                {recipe.fields.name}
+              </div>
             ))}
-            <button onClick={handle.cancelPlan}>Nuevo plan</button>
+            <button className="action-button red" onClick={handle.cancelPlan}>
+              Nuevo plan
+            </button>
           </>
         ) : (
           <>
             {recipesList.map((recipe) => (
-              <div key={recipe.id}>
+              <div className="recipe-row" key={recipe.id}>
                 {recipe.fields.name}
                 {selectedRecipes.find((r) => r.id === recipe.id) ? (
-                  <button onClick={() => handle.removeRecipeFromPlan(recipe)}>
+                  <button
+                    className="recipe-row-action red"
+                    onClick={() => handle.removeRecipeFromPlan(recipe)}
+                  >
                     -
                   </button>
                 ) : (
-                  <button onClick={() => handle.addRecipeToPlan(recipe)}>
+                  <button
+                    className="recipe-row-action"
+                    onClick={() => handle.addRecipeToPlan(recipe)}
+                  >
                     +
                   </button>
                 )}
               </div>
             ))}
-            <button onClick={handle.startPlan}>Empezar plan</button>
+            <button className="action-button" onClick={handle.startPlan}>
+              Empezar plan
+            </button>
           </>
         )}
       </div>

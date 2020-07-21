@@ -6,11 +6,11 @@ const Ingredient = ({ id, value, onChangeIngredient }) => {
   const { data, status } = useIngredient(id);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <div className="recipe-row">Cargando ingrediente...</div>;
   }
 
   return (
-    <label style={{ display: "block" }}>
+    <label className="recipe-row" style={{ display: "block" }}>
       <input
         type="checkbox"
         checked={value}
@@ -24,9 +24,9 @@ const Ingredient = ({ id, value, onChangeIngredient }) => {
 export const Groceries = () => {
   const { ingredients, checkedIngredients, onChangeIngredient } = useConnect();
   return (
-    <div>
+    <div className="recipe-container">
       <h1>Lista de la compra</h1>
-      <div>
+      <div className="recipes">
         {ingredients.map((id) => (
           <Ingredient
             key={id}
