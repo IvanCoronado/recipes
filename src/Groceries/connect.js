@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
+import uniqBy from "lodash/uniqBy";
 import { useParams } from "react-router-dom";
 
 export const useConnect = () => {
@@ -8,9 +9,11 @@ export const useConnect = () => {
       ? JSON.parse(localStorage.getItem(apiKey))
       : [];
 
-    return selectedRecipes.flatMap(({ fields }) =>
+    const allIngredients = selectedRecipes.flatMap(({ fields }) =>
       fields.ingredients.map((id) => id)
     );
+
+    return uniqBy(allIngredients);
   }, [apiKey]);
   const [checkedIngredients, setCheckedIngredients] = useState(
     localStorage.getItem(`${apiKey}-checked`)

@@ -25,7 +25,7 @@ const Base = () => {
           }}
           to={"recipes"}
         >
-          Recipes
+          Recetas
         </NavLink>
         <NavLink
           activeStyle={{
@@ -33,7 +33,7 @@ const Base = () => {
           }}
           to={"groceries"}
         >
-          Groceries
+          Lista
         </NavLink>
       </div>
     </div>
