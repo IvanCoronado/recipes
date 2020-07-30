@@ -1,12 +1,16 @@
 import React from "react";
+
+import { useIngredient } from "api/useIngredient";
+import { Loading } from "components/Loading";
+
 import { useConnect } from "./connect";
-import { useIngredient } from "../useIngredient";
+import { Container, Title, Column } from "./styles";
 
 const Ingredient = ({ id, value, onChangeIngredient }) => {
   const { data, status } = useIngredient(id);
 
   if (status === "loading") {
-    return <div className="recipe-row">Cargando ingrediente...</div>;
+    return <Loading />;
   }
 
   return (
@@ -24,9 +28,9 @@ const Ingredient = ({ id, value, onChangeIngredient }) => {
 export const Groceries = () => {
   const { ingredients, checkedIngredients, onChangeIngredient } = useConnect();
   return (
-    <div className="recipe-container">
-      <h1>Lista de la compra</h1>
-      <div className="recipes">
+    <Container>
+      <Title>Lista de la compra</Title>
+      <Column>
         {ingredients.map((id) => (
           <Ingredient
             key={id}
@@ -35,7 +39,7 @@ export const Groceries = () => {
             onChangeIngredient={onChangeIngredient}
           />
         ))}
-      </div>
-    </div>
+      </Column>
+    </Container>
   );
 };

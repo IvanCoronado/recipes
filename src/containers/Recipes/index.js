@@ -1,4 +1,7 @@
 import React from "react";
+
+import { Loading } from "components/Loading";
+
 import { useConnect } from "./connect";
 import "./styles.css";
 
@@ -6,11 +9,11 @@ export const Recipes = () => {
   const { data, planActive, selectedRecipes, isLoading, handle } = useConnect();
 
   if (!data && isLoading) {
-    return <div className="full-loading">Cargando...</div>;
+    return <Loading />;
   }
 
   if (!data) {
-    return <div className="full-loading">Ups... error</div>;
+    return null;
   }
 
   const { records: recipesList } = data;
