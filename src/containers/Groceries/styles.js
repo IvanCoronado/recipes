@@ -17,16 +17,3 @@ export const Column = styled.div`
   flex: 1;
   overflow-y: auto;
 `;
-
-export const FloatingActions = styled.div`
-  position: absolute;
-  bottom: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-
-  button:first-child {
-    margin-right: 8px;
-  }
-`;
