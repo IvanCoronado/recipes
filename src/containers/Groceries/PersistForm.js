@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useFormikContext } from "formik";
 import uniqBy from "lodash/uniqBy";
@@ -9,17 +9,22 @@ import { MEAL_PLAN_FORM_NAME } from "containers/MealPlan/PersistForm";
 
 export const GROCERIES_FORM_NAME = "-groceries";
 
-const FetchIngredient = ({ id, onResolve }) => {
+const FetchIngredient = ({ id, ingredients, setIngredients }) => {
   const { data } = useIngredient(id);
   useEffect(() => {
     if (!!data) {
-      onResolve({
-        id: data.id,
-        category: data.fields.category,
-        name: data.fields.name,
-      });
+      if (!ingredients.find((ingredient) => ingredient.id === data.id)) {
+        setIngredients([
+          ...ingredients,
+          {
+            id: data.id,
+            category: data.fields.category,
+            name: data.fields.name,
+          },
+        ]);
+      }
     }
-  }, [data]);
+  }, [data, ingredients, setIngredients]);
 
   return null;
 };
@@ -56,13 +61,6 @@ export const PersistForm = () => {
     }
   }, [apiKey, setValues]);
 
-  const onResolveIngredient = useCallback(
-    (ingredient) => {
-      setIngredients([...ingredients, ingredient]);
-    },
-    [ingredients]
-  );
-
   useEffect(() => {
     if (ingredientsInMealPlan.length === ingredients.length) {
       const categorizedIngredients = Object.values(
@@ -89,7 +87,8 @@ export const PersistForm = () => {
           <FetchIngredient
             key={ingredientId}
             id={ingredientId}
-            onResolve={onResolveIngredient}
+            ingredients={ingredients}
+            setIngredients={setIngredients}
           />
         ))}
     </>
