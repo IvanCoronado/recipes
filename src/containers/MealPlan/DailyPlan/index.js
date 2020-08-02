@@ -1,35 +1,36 @@
-import React from "react";
+import React, { memo } from "react";
 import { Field, FieldArray } from "formik";
 
 import { RecipeCard } from "components/RecipeCard";
-import { AddButtonCard } from "components/AddButtonCard";
 
 import { Container, Title, ScrolledRow } from "./styles";
+import { AddRecipe } from "../AddRecipe";
 
-export const DailyPlan = (props) => {
+const DailyPlan = ({ name, isActive }) => {
   return (
-    <Field name={props.name}>
+    <Field name={name}>
       {(fieldProps) => (
         <Container>
-          <Title>{fieldProps.field.value.name}</Title>
+          <Title>Día {fieldProps.field.value.id}</Title>
           <FieldArray name={`${fieldProps.field.name}.recipes`}>
             {(arrayHelpers) => (
               <ScrolledRow>
                 {fieldProps.field.value.recipes.map((recipe, index) => (
-                  <RecipeCard
-                    key={index}
-                    name={recipe.name}
-                    onDelete={() => arrayHelpers.remove(index)}
-                  />
+                  <React.Fragment key={index}>
+                    {isActive ? (
+                      <RecipeCard
+                        recipe={recipe}
+                        onCheck={() => console.log("check")}
+                      />
+                    ) : (
+                      <RecipeCard
+                        recipe={recipe}
+                        onDelete={() => arrayHelpers.remove(index)}
+                      />
+                    )}
+                  </React.Fragment>
                 ))}
-                <AddButtonCard
-                  type="button"
-                  onClick={() => {
-                    arrayHelpers.push({
-                      name: "Nueva recipe",
-                    });
-                  }}
-                />
+                {!isActive && <AddRecipe arrayHelpers={arrayHelpers} />}
               </ScrolledRow>
             )}
           </FieldArray>
@@ -38,3 +39,5 @@ export const DailyPlan = (props) => {
     </Field>
   );
 };
+
+export default memo(DailyPlan);

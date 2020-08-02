@@ -1,53 +1,67 @@
 import React from "react";
 import { Form, Formik, FieldArray } from "formik";
 
-import Button from "components/Button";
+import Header from "components/Header";
+import { VerticalScroll } from "components/Layout";
 
-import { useConnect } from "./connect";
-import { Container, Title, Column, FloatingActions } from "./styles";
-import { DailyPlan } from "./DailyPlan";
+import { PersistForm } from "./PersistForm";
+import { FloatingButton, AddButton } from "./styles";
+import DailyPlan from "./DailyPlan";
 
 export const MealPlan = () => {
-  const { form } = useConnect();
-
   return (
-    <Container>
-      <Title>Plan de comida</Title>
-      <Column>
-        <Formik initialValues={form.initialValues} onSubmit={form.handleSubmit}>
-          {({ values }) => (
+    <>
+      <Header title="Plan de comida" />
+      <VerticalScroll>
+        <Formik onSubmit={() => {}}>
+          {({ values: { isActive, mealPlan = [] } = {}, setFieldValue }) => (
             <Form noValidate>
               <FieldArray name="mealPlan">
                 {(arrayHelpers) => (
                   <>
-                    {values.mealPlan.map((day, index) => (
+                    {mealPlan.map((day, index) => (
                       <DailyPlan
-                        key={day.name}
+                        key={day.id}
                         name={`${arrayHelpers.name}.${index}`}
+                        isActive={isActive}
                       />
                     ))}
-                    <FloatingActions>
-                      <Button
+                    {!isActive && (
+                      <AddButton
                         type="button"
-                        onClick={() => {
+                        onClick={() =>
                           arrayHelpers.push({
-                            name: "Miercoles",
-                            id: values.mealPlan.length + 1,
+                            id: mealPlan.length,
                             recipes: [],
-                          });
-                        }}
+                          })
+                        }
                       >
                         Nuevo día
-                      </Button>
-                      <Button type="submit">Empezar plan</Button>
-                    </FloatingActions>
+                      </AddButton>
+                    )}
                   </>
                 )}
               </FieldArray>
+              {isActive ? (
+                <FloatingButton
+                  type="button"
+                  onClick={() => setFieldValue("isActive", false)}
+                >
+                  Editar
+                </FloatingButton>
+              ) : (
+                <FloatingButton
+                  type="button"
+                  onClick={() => setFieldValue("isActive", true)}
+                >
+                  Empezar plan
+                </FloatingButton>
+              )}
+              <PersistForm />
             </Form>
           )}
         </Formik>
-      </Column>
-    </Container>
+      </VerticalScroll>
+    </>
   );
 };
