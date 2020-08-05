@@ -32,6 +32,28 @@ export const Configuration = () => {
             />
             <PersistForm />
             <Button type="submit">Entrar</Button>
+            <a
+              style={{ marginTop: "20px", display: "block" }}
+              href="https://www.notion.so/Tutorial-para-usar-la-aplicaci-n-3c69fcee7cb54cc0bac12fe10c1ad0b4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Como conseguir tu APP Id y Token
+            </a>
+            <a
+              style={{
+                position: "absolute",
+                bottom: "20px",
+                width: "100%",
+                textAlign: "center",
+                display: "block",
+              }}
+              href="https://twitter.com/Dividivan"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Created by IvanMaking
+            </a>
           </Form>
         </Formik>
       </VerticalScroll>
