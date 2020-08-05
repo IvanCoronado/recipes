@@ -6,7 +6,7 @@ import groupBy from "lodash/groupBy";
 import { useIngredient } from "api/useIngredient";
 import { MEAL_PLAN_FORM_NAME } from "containers/MealPlan/PersistForm";
 
-export const GROCERIES_FORM_NAME = "-groceries";
+export const GROCERIES_FORM_NAME = "groceries";
 
 const FetchIngredient = ({ id, ingredients, setIngredients }) => {
   const { data } = useIngredient(id);
