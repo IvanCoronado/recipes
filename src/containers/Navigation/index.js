@@ -1,28 +1,21 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import { AppContainer } from "components/Layout";
-import { BottomNav } from "components/BottomNav";
 import { Groceries } from "containers/Groceries";
 import { MealPlan } from "containers/MealPlan";
-
-const Base = () => {
-  return (
-    <AppContainer>
-      <Switch>
-        <Route path={`/:apiKey/groceries`} component={Groceries} />
-        <Route path={`/:apiKey/meal-plan`} component={MealPlan} />
-      </Switch>
-      <BottomNav />
-    </AppContainer>
-  );
-};
+import { Configuration } from "containers/Configuration";
 
 const Navigation = () => {
   return (
-    <Switch>
-      <Route path="/:apiKey" component={Base} />
-    </Switch>
+    <AppContainer>
+      <Switch>
+        <Route path="/lista-de-la-compra" component={Groceries} />
+        <Route path="/plan-de-comida" component={MealPlan} />
+        <Route path="/configuracion" component={Configuration} />
+        <Redirect to="/configuracion" />
+      </Switch>
+    </AppContainer>
   );
 };
 

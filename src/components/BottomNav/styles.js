@@ -8,7 +8,7 @@ export const Tabs = styled.div`
   height: 45px;
   background-color: lightslategray;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
 export const Tab = styled(NavLink).attrs(() => ({

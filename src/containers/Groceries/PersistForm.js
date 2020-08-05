@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useParams } from "react-router-dom";
 import { useFormikContext } from "formik";
 import uniqBy from "lodash/uniqBy";
 import groupBy from "lodash/groupBy";
@@ -30,14 +29,12 @@ const FetchIngredient = ({ id, ingredients, setIngredients }) => {
 };
 
 export const PersistForm = () => {
-  const { apiKey } = useParams();
   const { values, setValues } = useFormikContext();
   const [ingredients, setIngredients] = useState([]);
 
   const { mealPlanIsActive, ingredientsInMealPlan } = useMemo(() => {
-    const key = apiKey + MEAL_PLAN_FORM_NAME;
-    const selectedRecipes = localStorage.getItem(key)
-      ? JSON.parse(localStorage.getItem(key))
+    const selectedRecipes = localStorage.getItem(MEAL_PLAN_FORM_NAME)
+      ? JSON.parse(localStorage.getItem(MEAL_PLAN_FORM_NAME))
       : { isActive: false, mealPlan: [] };
     const allIngredients = selectedRecipes.mealPlan.flatMap(({ recipes }) =>
       recipes.flatMap(({ fields }) => fields.ingredients.map((id) => id))
@@ -47,11 +44,12 @@ export const PersistForm = () => {
       mealPlanIsActive: selectedRecipes.isActive,
       ingredientsInMealPlan: uniqBy(allIngredients),
     };
-  }, [apiKey]);
+  }, []);
 
   const groceriesAlreadyCached = useMemo(() => {
-    const key = apiKey + GROCERIES_FORM_NAME;
-    const groceriesCached = JSON.parse(localStorage.getItem(key));
+    const groceriesCached = JSON.parse(
+      localStorage.getItem(GROCERIES_FORM_NAME)
+    );
 
     if (groceriesCached) {
       setValues(groceriesCached);
@@ -59,7 +57,7 @@ export const PersistForm = () => {
     } else {
       return false;
     }
-  }, [apiKey, setValues]);
+  }, [setValues]);
 
   useEffect(() => {
     if (ingredientsInMealPlan.length === ingredients.length) {
@@ -74,10 +72,9 @@ export const PersistForm = () => {
 
   useEffect(() => {
     if (!!values) {
-      const key = apiKey + GROCERIES_FORM_NAME;
-      window.localStorage.setItem(key, JSON.stringify(values));
+      window.localStorage.setItem(GROCERIES_FORM_NAME, JSON.stringify(values));
     }
-  }, [values, apiKey]);
+  }, [values]);
 
   return (
     <>

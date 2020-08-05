@@ -1,13 +1,8 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { api } from "api/client";
 
-const getIngredientCategories = async (_, apiKey) => {
-  return fetch(
-    `https://api.airtable.com/v0/appojBodpMEKCgFIP/ingredientCategories?api_key=${apiKey}`
-  ).then((res) => res.json());
-};
+const getIngredientCategories = async (_) => api(`ingredientCategories`);
 
 export const useIngredientCategories = () => {
-  const { apiKey } = useParams();
-  return useQuery(["ingredientCategory", apiKey], getIngredientCategories);
+  return useQuery(["ingredientCategory"], getIngredientCategories);
 };

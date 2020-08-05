@@ -4,6 +4,7 @@ import { Form, Formik, FieldArray } from "formik";
 import Checkbox from "components/Checkbox";
 import Header from "components/Header";
 import { VerticalScroll } from "components/Layout";
+import { BottomNav } from "components/BottomNav";
 
 import { PersistForm } from "./PersistForm";
 import { Section, SectionTitle } from "./styles";
@@ -62,6 +63,7 @@ export const Groceries = () => {
           )}
         </Formik>
       </VerticalScroll>
+      <BottomNav />
     </>
   );
 };

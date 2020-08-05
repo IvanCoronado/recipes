@@ -6,6 +6,7 @@ import Navigation from "containers/Navigation";
 import GlobalStyle from "styles/GlobalStyle";
 import plugins from "styles/plugins";
 import theme from "styles/theme";
+import { RedirectWhenError } from "api/client";
 
 import { SelectedRecipesProvider } from "contexts/context";
 
@@ -16,6 +17,7 @@ const Root = () => (
       <BrowserRouter>
         <SelectedRecipesProvider>
           <Navigation />
+          <RedirectWhenError />
         </SelectedRecipesProvider>
       </BrowserRouter>
     </ThemeProvider>

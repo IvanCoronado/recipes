@@ -3,6 +3,7 @@ import { Form, Formik, FieldArray } from "formik";
 
 import Header from "components/Header";
 import { VerticalScroll } from "components/Layout";
+import { BottomNav } from "components/BottomNav";
 
 import { PersistForm } from "./PersistForm";
 import { FloatingButton, AddButton } from "./styles";
@@ -62,6 +63,7 @@ export const MealPlan = () => {
           )}
         </Formik>
       </VerticalScroll>
+      <BottomNav />
     </>
   );
 };
