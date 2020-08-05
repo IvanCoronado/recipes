@@ -13,4 +13,8 @@ export const FloatingButton = styled(Button)`
   transform: translateX(-50%);
 `;
 
-export const AddButton = styled(Button)``;
+export const AddButton = styled(Button)`
+  width: calc(100% - 32px);
+  margin: 32px 16px 16px;
+  justify-content: center;
+`;

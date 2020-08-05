@@ -1,13 +1,21 @@
 import styled from "styled-components";
+import DefaultButton from "components/Button";
 import { BodyMedium } from "components/Typography";
 
 export const Container = styled.div`
   margin-bottom: 8px;
 `;
 
-export const Title = styled(BodyMedium)`
+export const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 16px 16px 8px 16px;
 `;
+
+export const Title = styled(BodyMedium)``;
+
+export const Remove = styled(DefaultButton)``;
 
 export const ScrolledRow = styled.div`
   width: 100%;

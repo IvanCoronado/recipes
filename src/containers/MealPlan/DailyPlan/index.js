@@ -3,15 +3,27 @@ import { Field, FieldArray } from "formik";
 
 import { RecipeCard } from "components/RecipeCard";
 
-import { Container, Title, ScrolledRow } from "./styles";
+import { Container, Header, Title, Remove, ScrolledRow } from "./styles";
 import { AddRecipe } from "../AddRecipe";
 
-const DailyPlan = ({ name, isActive }) => {
+const DailyPlan = ({ name, isActive, handleRemove, index }) => {
   return (
     <Field name={name}>
       {(fieldProps) => (
         <Container>
-          <Title>Día {fieldProps.field.value.id}</Title>
+          <Header>
+            <Title>Día {index}</Title>
+            {!isActive && (
+              <Remove
+                type="button"
+                variant="link"
+                onClick={() => handleRemove(index)}
+              >
+                borrar
+              </Remove>
+            )}
+          </Header>
+
           <FieldArray name={`${fieldProps.field.name}.recipes`}>
             {(arrayHelpers) => (
               <ScrolledRow>

@@ -18,26 +18,28 @@ export const MealPlan = () => {
           {({ values: { isActive, mealPlan = [] } = {}, setFieldValue }) => (
             <Form noValidate>
               <FieldArray name="mealPlan">
-                {(arrayHelpers) => (
+                {({ name, push, remove }) => (
                   <>
                     {mealPlan.map((day, index) => (
                       <DailyPlan
-                        key={day.id}
-                        name={`${arrayHelpers.name}.${index}`}
+                        key={index}
+                        name={`${name}.${index}`}
                         isActive={isActive}
+                        handleRemove={remove}
+                        index={index}
                       />
                     ))}
                     {!isActive && (
                       <AddButton
                         type="button"
+                        variant="secondary"
                         onClick={() =>
-                          arrayHelpers.push({
-                            id: mealPlan.length,
+                          push({
                             recipes: [],
                           })
                         }
                       >
-                        Nuevo día
+                        Añadir día
                       </AddButton>
                     )}
                   </>
