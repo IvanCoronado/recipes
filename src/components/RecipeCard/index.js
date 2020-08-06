@@ -1,13 +1,23 @@
 import React, { useCallback } from "react";
 
-import { Container, Img, Name } from "./styles";
+import {
+  Container,
+  Img,
+  Name,
+  ActionButton,
+  RemoveIcon,
+  CheckIcon,
+  UncheckIcon,
+} from "./styles";
 
 export const RecipeCard = ({
   recipe,
+  index,
   name,
-  onDelete,
   onSelect,
-  onCheck,
+  showCheck,
+  showDelete,
+  arrayHelpers,
   ...props
 }) => {
   const { fields } = recipe;
@@ -16,6 +26,17 @@ export const RecipeCard = ({
   const handleSelect = useCallback(() => {
     onSelect(recipe);
   }, [onSelect, recipe]);
+
+  const handleCheck = useCallback(() => {
+    arrayHelpers.replace(index, {
+      ...recipe,
+      checked: !recipe.checked,
+    });
+  }, [arrayHelpers, index, recipe]);
+
+  const handleDelete = useCallback(() => {
+    arrayHelpers.remove(index);
+  }, [arrayHelpers, index]);
 
   const propsWhenIsClickable = onSelect
     ? {
@@ -26,14 +47,24 @@ export const RecipeCard = ({
 
   return (
     <Container title={fields.name} {...props} {...propsWhenIsClickable}>
-      <Img src={imageSrc} />
-      <Name>{fields.name}</Name>
-      {onDelete && (
-        <button type="button" onClick={onDelete}>
-          remove
-        </button>
+      <Img src={imageSrc} disabled={recipe.checked} />
+      {fields.preparation ? (
+        <Name as="a" href={fields.preparation} target="_blank">
+          {fields.name}
+        </Name>
+      ) : (
+        <Name>{fields.name}</Name>
       )}
-      {onCheck && <></>}
+      {showDelete && (
+        <ActionButton type="button" variant="secondary" onClick={handleDelete}>
+          <RemoveIcon />
+        </ActionButton>
+      )}
+      {showCheck && (
+        <ActionButton type="button" variant="secondary" onClick={handleCheck}>
+          {recipe.checked ? <CheckIcon /> : <UncheckIcon />}
+        </ActionButton>
+      )}
     </Container>
   );
 };

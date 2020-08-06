@@ -23,7 +23,6 @@ const DailyPlan = ({ name, isActive, handleRemove, index }) => {
               </Remove>
             )}
           </Header>
-
           <FieldArray name={`${fieldProps.field.name}.recipes`}>
             {(arrayHelpers) => (
               <ScrolledRow>
@@ -31,13 +30,17 @@ const DailyPlan = ({ name, isActive, handleRemove, index }) => {
                   <React.Fragment key={index}>
                     {isActive ? (
                       <RecipeCard
+                        index={index}
                         recipe={recipe}
-                        onCheck={() => console.log("check")}
+                        arrayHelpers={arrayHelpers}
+                        showCheck={true}
                       />
                     ) : (
                       <RecipeCard
+                        index={index}
                         recipe={recipe}
-                        onDelete={() => arrayHelpers.remove(index)}
+                        arrayHelpers={arrayHelpers}
+                        showDelete={true}
                       />
                     )}
                   </React.Fragment>
