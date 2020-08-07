@@ -5,7 +5,7 @@ import Header from "components/Header";
 import Input from "components/Input";
 import Button from "components/Button";
 
-import { VerticalScroll } from "./styles";
+import { VerticalScroll, Footer, Link } from "./styles";
 import { useConnect } from "./connect";
 import { PersistForm } from "./PersistForm";
 import { ShareUrl } from "./ShareUrl";
@@ -33,30 +33,19 @@ export const Configuration = () => {
             />
             <PersistForm />
             <Button type="submit">Entrar</Button>
-            <a
+            <Link
               style={{ marginTop: "20px", display: "block" }}
               href="https://www.notion.so/Tutorial-para-usar-la-aplicaci-n-3c69fcee7cb54cc0bac12fe10c1ad0b4"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Como conseguir tu APP Id y Token
-            </a>
+            </Link>
 
             <ShareUrl />
-            <a
-              style={{
-                position: "absolute",
-                bottom: "20px",
-                width: "100%",
-                textAlign: "center",
-                display: "block",
-              }}
-              href="https://twitter.com/Dividivan"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Created by IvanMaking
-            </a>
+            <Footer>
+              <Link href="https://twitter.com/Dividivan">
+                Created by IvanMaking
+              </Link>
+            </Footer>
           </Form>
         </Formik>
       </VerticalScroll>

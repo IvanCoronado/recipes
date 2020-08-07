@@ -15,3 +15,16 @@ export const VerticalScroll = styled(BaseVerticalScroll)`
     }
   }
 `;
+
+export const Link = styled.a.attrs(() => ({
+  target: "_blank",
+  rel: "noopener noreferrer",
+}))`
+  color: ${({ theme }) => theme.colors.dark};
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+`;
