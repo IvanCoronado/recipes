@@ -1,16 +1,14 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { recoverCredentials } from "localStorage";
 
 const apiA = axios.create();
 
+const emptyCredentials = { appId: "", apiToken: "" };
+
 export const api = async (url) => {
-  const { appId, apiToken } = window.localStorage.getItem("credentials")
-    ? JSON.parse(window.localStorage.getItem("credentials"))
-    : {
-        appId: "",
-        apiToken: "",
-      };
+  const { appId, apiToken } = recoverCredentials() || emptyCredentials;
 
   return apiA(
     `https://api.airtable.com/v0/${appId}/${url}?api_key=${apiToken}`
