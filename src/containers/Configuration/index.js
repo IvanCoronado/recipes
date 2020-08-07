@@ -8,6 +8,7 @@ import Button from "components/Button";
 import { VerticalScroll } from "./styles";
 import { useConnect } from "./connect";
 import { PersistForm } from "./PersistForm";
+import { ShareUrl } from "./ShareUrl";
 
 export const Configuration = () => {
   const { schema, handleSubmit } = useConnect();
@@ -40,6 +41,8 @@ export const Configuration = () => {
             >
               Como conseguir tu APP Id y Token
             </a>
+
+            <ShareUrl />
             <a
               style={{
                 position: "absolute",

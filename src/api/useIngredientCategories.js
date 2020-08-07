@@ -1,8 +1,11 @@
 import { useQuery } from "react-query";
 import { api } from "api/client";
+import { recoverCredentials } from "localStorage";
 
 const getIngredientCategories = async (_) => api(`ingredientCategories`);
 
 export const useIngredientCategories = () => {
-  return useQuery(["ingredientCategory"], getIngredientCategories);
+  const { appId } = recoverCredentials();
+
+  return useQuery(["ingredientCategory", appId], getIngredientCategories);
 };
