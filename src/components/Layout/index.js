@@ -24,33 +24,47 @@ export const HorizontalScroll = styled.div``;
 
 export const RecipesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--recipe-image-height), 1fr)
+  );
   grid-gap: 16px;
   padding: 16px;
 `;
 
 export const ScrolledRow = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-gap: calc(var(--gutter) / 2);
+  grid-template-columns: 10px;
+  grid-template-rows: minmax(var(--recipe-image-height), 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: var(--recipe-image-height);
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  > div {
-    width: 120px;
-    flex: 0 0 auto;
-    margin-left: 16px;
-  }
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  padding-bottom: calc(0.75 * var(--gutter));
+  margin-bottom: calc(-0.25 * var(--gutter));
 
   > button {
-    width: 120px;
-    height: 120px;
-    flex: 0 0 auto;
-    margin-left: 16px;
+    width: var(--recipe-image-height);
+    height: var(--recipe-image-height);
+  }
+
+  &::after,
+  ::before {
+    content: "";
+    width: 10px;
+  }
+
+  @supports (-webkit-overflow-scrolling: touch) {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 

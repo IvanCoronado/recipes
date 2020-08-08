@@ -17,6 +17,22 @@ export const Button = styled.button`
 
   ${({ $variant }) => {
     switch ($variant) {
+      case "alert":
+        return css`
+          background-color: ${({ theme }) => addAlpha(theme.colors.red, 0.8)};
+          color: ${({ theme }) => theme.colors.white};
+          :hover:not(:disabled) {
+            background-color: ${({ theme }) => theme.colors.red};
+          }
+          :focus {
+            background-color: ${({ theme }) => theme.colors.red};
+            border: 1px solid ${({ theme }) => theme.colors.red};
+          }
+          :disabled {
+            background-color: ${({ theme }) => addAlpha(theme.colors.red, 0.1)};
+            color: ${({ theme }) => addAlpha(theme.colors.white, 0.4)};
+          }
+        `;
       case "secondary":
         return css`
           background-color: ${({ theme }) => theme.colors.gray1};
@@ -27,7 +43,6 @@ export const Button = styled.button`
           :focus {
             background-color: ${({ theme }) => theme.colors.gray0};
             border: 1px solid ${({ theme }) => theme.colors.gray2};
-            outline: none;
           }
           :disabled {
             color: ${({ theme }) => theme.colors.gray6};
@@ -47,7 +62,6 @@ export const Button = styled.button`
               addAlpha(theme.colors.white, 0.1)};
             border: 1px solid
               ${({ theme }) => addAlpha(theme.colors.white, 0.2)};
-            outline: none;
           }
           :disabled {
             color: ${({ theme }) => addAlpha(theme.colors.white, 0.4)};
@@ -81,9 +95,7 @@ export const Button = styled.button`
             background-color: ${({ theme }) => theme.colors.governorBay};
           }
           :focus {
-            background-color: ${({ theme }) => theme.colors.dullLavender};
             border: 1px solid ${({ theme }) => theme.colors.royalBlue};
-            outline: none;
           }
           :disabled {
             background-color: ${({ theme }) =>

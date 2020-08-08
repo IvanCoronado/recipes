@@ -5,7 +5,6 @@ import DefaultButton from "components/Button";
 import { FiTrash2, FiCheckCircle, FiCircle } from "react-icons/fi";
 
 export const Container = styled.div`
-  min-width: 120px;
   position: relative;
 
   ${({ isClickable }) =>
@@ -17,7 +16,7 @@ export const Container = styled.div`
 
 export const Img = styled.img`
   width: 100%;
-  height: 120px;
+  height: var(--recipe-image-height);
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 4px;

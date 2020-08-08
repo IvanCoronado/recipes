@@ -48,16 +48,17 @@ export const MealPlan = () => {
               {isActive ? (
                 <FloatingButton
                   type="button"
+                  variant="alert"
                   onClick={() => setFieldValue("isActive", false)}
                 >
-                  Editar
+                  Editar plan
                 </FloatingButton>
               ) : (
                 <FloatingButton
                   type="button"
                   onClick={() => setFieldValue("isActive", true)}
                 >
-                  Empezar plan
+                  Crear plan
                 </FloatingButton>
               )}
               <PersistForm />

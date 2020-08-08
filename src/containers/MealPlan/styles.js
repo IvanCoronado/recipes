@@ -4,8 +4,7 @@ import Button from "components/Button";
 export const FloatingButton = styled(Button)`
   position: absolute;
   bottom: 61px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 16px;
 `;
 
 export const AddButton = styled(Button)`

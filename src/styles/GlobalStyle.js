@@ -20,5 +20,9 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+  :root {
+    --gutter: 16px;
+    --recipe-image-height: 160px;
+  }
 `;
 export default GlobalStyle;
