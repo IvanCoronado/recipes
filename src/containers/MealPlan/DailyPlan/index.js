@@ -2,8 +2,10 @@ import React, { memo } from "react";
 import { Field, FieldArray } from "formik";
 
 import { RecipeCard } from "components/RecipeCard";
+import { BodyMedium as Title } from "components/Typography";
+import { ScrolledRow, Header } from "components/Layout";
 
-import { Container, Header, Title, Remove, ScrolledRow } from "./styles";
+import { Container, Remove } from "./styles";
 import { AddRecipe } from "../AddRecipe";
 
 const DailyPlan = ({ name, isActive, handleRemove, index }) => {
